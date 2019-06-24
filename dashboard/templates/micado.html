@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block page_header %}
+    Prometheus
+    <small>(<a href="https://{{ request.host }}/micado" target="_blank">pop out</a>)</small>
+{% endblock %}
+
+{% block content %}
+        <div class="intrinsic-container">
+            <iframe src="https://{{ request.host }}/micado" allowfullscreen></iframe>
+        </div>
+{% endblock %}

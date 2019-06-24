@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, current_app
 from flask_menu import register_menu
+import requests
 
 home = Blueprint("home", __name__, url_prefix="/")
 
@@ -28,6 +29,12 @@ def home_grafana():
 def home_docker_visualizer():
     return render_template("kubernetes-dashboard.html",
         frontend_ip=current_app.config["FRONTEND_IP"])
+
+@home.route("/micado")
+@home.route("/dashboard/micado")
+@register_menu(home, '.micado', "Micado Application", order=0)
+def micado_application():
+    return requests.get('https://31.171.245.153:443/toscasubmitter/v1.0/list_app', verify=False, auth=('admin', 'admin'))
 
 
 @home.route("/logout")
